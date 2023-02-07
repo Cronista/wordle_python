@@ -31,7 +31,7 @@ pygame.display.update()
 
 #main logic (with placeholders)
 
-
+#check if the letter is yellow and repeats
 
 #exit routine
 is_running = True
