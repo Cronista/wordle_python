@@ -31,7 +31,10 @@ pygame.display.update()
 
 #main logic (with placeholders)
 
-
+#populate word container with each user input letter 
+wordContainer = []
+for i in wordContainer:
+    wordContainer[i] = (Lposition) + i 
 
 #exit routine
 is_running = True
