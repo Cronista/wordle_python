@@ -12,7 +12,7 @@ black = (0, 0, 0)
 gray = (166, 166, 166)
 
 #define gui; create canvas
-pygame.display.set_caption('Jogo de Termos')
+pygame.display.set_caption('Wordly')
 canvas = pygame.display.set_mode((width, height))
 
 background = pygame.Surface((width, height))
@@ -24,7 +24,10 @@ background.fill(pygame.Color('#000000'))
 canvas.blit(background, (0,0))
 
 #draw word/letters container 
-pygame.draw.rect(canvas, gray, (230,50,700,140), 5)
+pygame.draw.rect(canvas, gray, (50,230,700,140), 5)
+
+for i in range(190, 750, 140):
+    pygame.draw.rect(canvas, gray, (i,230,5,140), 5)
 
 #update display
 pygame.display.update()
