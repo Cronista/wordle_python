@@ -33,7 +33,6 @@ for i in range(190, 750, 140):
 pygame.display.update()
 
 #main logic (with placeholders)
-
 #populate word container with each user input letter 
 wordContainer = []
 for i in wordContainer:
