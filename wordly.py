@@ -34,9 +34,18 @@ pygame.display.update()
 
 #main logic
 #populate word container with each user input
-wordContainer = []
+wordContainer = ['','','','','']
 for i in wordContainer:
-    wordContainer[i] = Lposition + i 
+    wordContainer[i] = Lposition[i] #maybe not
+    
+    #check for input length
+    if wordContainer[i] == '':
+        print('Five letter words only.')
+        input()
+        exit() #exit loop only, not entire routine
+
+#check if it is yellow and repeats
+
 
 #exit routine
 is_running = True
