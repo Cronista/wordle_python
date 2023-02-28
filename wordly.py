@@ -33,27 +33,51 @@ for i in range(190, 750, 140):
 pygame.display.update()
 
 #main logic
+#create the Draw and Try dictionaries
+tryDict = {
+        1: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        2: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        3: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        4: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        5: {"value": "", "repeat": 0, "color": [0, 0, 0]}
+    }
 
-while gameover == False:
+drawDict = {
+        1: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        2: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        3: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        4: {"value": "", "repeat": 0, "color": [0, 0, 0]},
+        5: {"value": "", "repeat": 0, "color": [0, 0, 0]}
+    }
 
-    #user input
+def wordle():
 
-    #populate word container with each user input
-    wordContainer = ['','','','','']
-    for i in wordContainer:
-        wordContainer[i] = Lposition[i] #maybe not
-        
+    while gameover == False:
+
+        #populate tryDict with user input(not done yet)
+            
         #check for input length
-        if wordContainer[i] == '':
-            print('Five letter words only.')
+        if tryDict[i]["value"] == '':
+            print(f'Five letter words only.\n')
             input()
-            break #exit loop only, not entire routine
-        break #exit maingameloop only, not entire routine
+            wordle() #exit if loop only, not entire game loop
 
-    #more checks
+        #more checks (not done yet)
 
-    #check if it is yellow and repeats
+ #check if it is yellow and repeats (not done yet)
+def yellowAndRepeats(dict1, dict2):
 
+#update the attempts list, tries
+def tryListUpdate():
+
+#check if the game is over or present the score if won
+def gameStatus(dict1, dict2): 
+
+#reset the game. Whole routine
+def reset():
+
+#update the virtual keyboard with the status of letters used: black, gray, yellow or green
+def keyboard():
 
 #exit routine
 is_running = True
