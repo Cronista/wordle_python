@@ -64,7 +64,7 @@ def wordle():
 
         #more checks (not done yet)
 
- #check if it is yellow and repeats (not done yet)
+#check if it is yellow and repeats (not done yet)
 def yellowAndRepeats(dict1, dict2):
 
 #update the attempts list, tries
