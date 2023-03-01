@@ -58,6 +58,7 @@ def wordle():
             
         #check for input length
         if tryDict[i]["value"] == '':
+
             print(f'Five letter words only.\n')
             input()
             wordle() #exit if loop only, not entire game loop
@@ -65,7 +66,59 @@ def wordle():
         #more checks (not done yet)
 
 #check if it is yellow and repeats (not done yet)
-def yellowAndRepeats(dict1, dict2):
+def yellowAndRepeats(drawVar, tryVar):
+    
+    #double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
+    for i in range(1,6):
+
+        for i2 in range(1,6):
+
+            #check for same letter within drawDict
+            if drawVar[i]["value"] == drawVar[i2]["value"]:
+                drawVar[i]["repeat"] += 1 
+
+            #check for same letter within tryDict
+            if tryVar[i]["value"] == tryVar[i2]["value"]:
+                tryVar[i]["repeat"] += 1
+
+            #color yellow letters that are equal between drawDict and tryDict that were not evaluated as such
+            if (drawVar[i]["value"] == tryVar[i2]["value"] and
+                drawVar[i]["color"] != [204, 204, 0] and
+                tryVar[i2]["color"] != [204, 204, 0]
+            ):
+                drawVar[i]["color"] = [204, 204, 0]
+                tryVar[i2]["color"] = [204, 204, 0]
+                #call keyboard function to update the virtual keyboard
+                keyboard(i2, "colorType")
+
+#verify and color green when the letters are equal and on the same position
+def checkForGreen(drawVar, tryVar):
+
+    for i in range(1,6):
+
+        if drawVar[i]["value"] == tryVar[i]["value"]:
+            drawVar[i]["color"] = [0, 255, 0]
+            tryVar[i]["color"] = [0, 255, 0]
+            keyboard(i, "colorType")
+            keyboard(i, "blackType")
+
+#check whether a rogue yellow was mistakenly colored and remove it 
+def missYellowry(drawVar, tryVar):
+
+    for oneYellowIndex in range(1,6):
+
+        for twoYellowIndex in range(1,6):
+
+            if (tryVar[oneYellowIndex]["value"] == drawVar[twoYellowIndex]["value"] and
+
+                tryVar[oneYellowIndex]["color"] != drawVar[twoYellowIndex]["color"] and
+
+                tryVar[oneYellowIndex]["color"] != [0, 255, 0] and
+                
+                drawVar[twoYellowIndex]["repeat"] < tryVar[oneYellowIndex]["repeat"]
+            ):
+                tryVar[oneYellowIndex]["color"] = [0, 0, 0]
+
 
 #update the attempts list, tries
 def tryListUpdate():
@@ -76,8 +129,8 @@ def gameStatus(dict1, dict2):
 #reset the game. Whole routine
 def reset():
 
-#update the virtual keyboard with the status of letters used: black, gray, yellow or green
-def keyboard():
+#update the virtual keyboard with the color information of each letter used in the attempt: black, gray, yellow or green
+def keyboard(index, type):
 
 #exit routine
 is_running = True
