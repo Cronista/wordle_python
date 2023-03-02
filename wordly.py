@@ -55,17 +55,31 @@ def wordle():
     while gameover == False:
 
         #populate tryDict with user input(not done yet)
-            
-        #check for input length
-        if tryDict[i]["value"] == '':
+        
+        wordLength(tryDict)
+        
+        yellowAndRepeats(drawDict, tryDict)
+        
+        checkForGreen(drawDict, tryDict)
+        
+        missYellowry(drawDict, tryDict)
+        
+        tryListUpdate()
+        
+#more checks (not done yet)
+        
+#check for input length. Five letter words only
+def wordLength(tryVar):
+    
+    for i in tryVar:
+        
+        if tryVar[i]["value"] == '':
 
             print(f'Five letter words only.\n')
             input()
-            wordle() #exit if loop only, not entire game loop
-
-        #more checks (not done yet)
-
-#check if it is yellow and repeats (not done yet)
+            wordle()
+            
+#check if it is yellow and repeats
 def yellowAndRepeats(drawVar, tryVar):
     
     #double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
@@ -81,7 +95,7 @@ def yellowAndRepeats(drawVar, tryVar):
             if tryVar[i]["value"] == tryVar[i2]["value"]:
                 tryVar[i]["repeat"] += 1
 
-            #color yellow letters that are equal between drawDict and tryDict that were not evaluated as such
+            #color yellow letters that are equal between drawDict and tryDict that were not yet evaluated as such
             if (drawVar[i]["value"] == tryVar[i2]["value"] and
                 drawVar[i]["color"] != [204, 204, 0] and
                 tryVar[i2]["color"] != [204, 204, 0]
@@ -130,7 +144,7 @@ def gameStatus(dict1, dict2):
 def reset():
 
 #update the virtual keyboard with the color information of each letter used in the attempt: black, gray, yellow or green
-def keyboard(index, type):
+def keyboard(currentIndex, type):
 
 #exit routine
 is_running = True
