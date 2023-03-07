@@ -50,13 +50,28 @@ drawDict = {
         5: {"value": "", "repeat": 0, "color": [0, 0, 0]}
     }
 
+#end game counters
+#win messages
+
+winmsg = ["Unbelievable...", "Incredible!", "Cool!", "Very good", "Nice", "Phew!"] 
+
+#var to check if maximum attempts were reached
+tryPos = 0
+gameover = False
+
 def wordle():
 
     while gameover == False:
 
+        global tryPos
+
         #populate tryDict with user input(not done yet)
-        
+
+        #populate tryDict with user input(not done yet)
+
         wordLength(tryDict)
+
+        userInputReset()
         
         yellowAndRepeats(drawDict, tryDict)
         
@@ -64,9 +79,40 @@ def wordle():
         
         missYellowry(drawDict, tryDict)
         
+        resetDrawTry("RC", "R")
+
         tryListUpdate()
-        
-#more checks (not done yet)
+
+        if gameStatus(tryDict) == 5:
+
+            for i in range(6):
+
+                if tryPos == i:
+
+                    print(winmsg[i])
+                    print("\n")
+                    input()
+
+                    resetDicts_EndVars()
+                    tryListClear()
+                    keyboardClear()
+                    wordle()
+
+        resetDrawTry("", "C")
+
+        tryPos += 1
+
+        if tryPos == 6:
+
+            gameover = True
+            print("Lost") #will be changed to only the draw word
+            print("\n")
+            input()
+
+            resetDicts_EndVars()
+            tryListClear()
+            keyboardClear()
+            wordle()
         
 #check for input length. Five letter words only
 def wordLength(tryVar):
@@ -78,6 +124,9 @@ def wordLength(tryVar):
             print(f'Five letter words only.\n')
             input()
             wordle()
+
+#clear the user input field
+def userInputReset():
             
 #check if it is yellow and repeats
 def yellowAndRepeats(drawVar, tryVar):
@@ -133,15 +182,72 @@ def missYellowry(drawVar, tryVar):
             ):
                 tryVar[oneYellowIndex]["color"] = [0, 0, 0]
 
+#reset the values information from the try and draw dictionaries, setting up for the next attempt
+def resetDrawTry(drawType, tryType):
+
+    #repeat reset
+    if "R" in drawType:
+
+        for i in drawDict:
+
+            drawDict[i]["repeat"] = 0
+
+    if "R" in tryType:
+
+        for i in tryDict:
+
+            tryDict[i]["repeat"] = 0
+    
+    #color reset 
+    if "C" in drawType:
+
+        for i in drawDict:
+
+            drawDict[i]["color"] = [0, 0, 0]
+
+    if "C" in tryType:
+
+        for i in tryDict:
+
+            tryDict[i]["color"] = [0, 0, 0]
 
 #update the attempts list, tries
 def tryListUpdate():
 
-#check if the game is over or present the score if won
-def gameStatus(dict1, dict2): 
+#check if the game score
+def gameStatus(tryVar): 
 
-#reset the game. Whole routine
-def reset():
+    count = 0
+    for i in tryVar:
+
+        if tryVar[i]["color"] == [0, 255, 0]:
+
+            count += 1
+
+    return count
+
+#reset the dictionaries and end game variables
+def resetDicts_EndVars():
+
+    global tryPos, gameover
+    tryPos = 0
+    gameover = False
+
+    for i in tryDict:
+
+        tryDict[i]["value"] = ""
+        tryDict[i]["repeat"] = 0
+        tryDict[i]["color"] = [0, 0, 0]
+
+        drawDict[i]["value"] = ""
+        drawDict[i]["repeat"] = 0
+        drawDict[i]["color"] = [0, 0, 0]
+
+#clear the attempts list
+def tryListClear():
+
+#clear the virtual keyboard
+def keyboardClear():
 
 #update the virtual keyboard with the color information of each letter used in the attempt: black, gray, yellow or green
 def keyboard(currentIndex, type):
