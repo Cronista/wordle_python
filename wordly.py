@@ -1,5 +1,8 @@
 import pygame
-##import pygame_gui
+import random
+#import pygame_gui
+
+#import pygame_gui
 
 pygame.init()
 
@@ -32,7 +35,13 @@ for i in range(190, 750, 140):
 #update display
 pygame.display.update()
 
-#main logic
+    #word list and word draw management
+#open uppercase word list
+with open("lista_palavras.txt","r") as file:
+
+    
+
+    #main logic
 #create the Draw and Try dictionaries
 tryDict = {
         1: {"value": "", "repeat": 0, "color": [0, 0, 0]},
@@ -52,7 +61,6 @@ drawDict = {
 
 #end game counters
 #win messages
-
 winmsg = ["Inacreditável...", "Incrível!", "Sensacional!", "Muito bom", "Bom", "Ufa!"] 
 
 #var to check if maximum attempts were reached
