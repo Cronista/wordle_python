@@ -53,7 +53,7 @@ drawDict = {
 #end game counters
 #win messages
 
-winmsg = ["Unbelievable...", "Incredible!", "Cool!", "Very good", "Nice", "Phew!"] 
+winmsg = ["Inacreditável...", "Incrível!", "Sensacional!", "Muito bom", "Bom", "Ufa!"] 
 
 #var to check if maximum attempts were reached
 tryPos = 0
@@ -105,7 +105,7 @@ def wordle():
         if tryPos == 6:
 
             gameover = True
-            print("Lost") #will be changed to only the draw word
+            print("Perdeu") #will be changed to only the draw word
             print("\n")
             input()
 
@@ -129,8 +129,8 @@ def wordLength(tryVar):
 def userInputReset():
             
 #check if it is yellow and repeats
-def yellowAndRepeats(drawVar, tryVar):
-    
+def yellowAndRepeats(drawVar, tryVar):  
+
     #double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
     for i in range(1,6):
 
