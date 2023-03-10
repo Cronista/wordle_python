@@ -108,7 +108,7 @@ serão
 jogos
 novos
 carro
-idéia
+ideia
 norte
 força
 tarde
@@ -872,7 +872,6 @@ vasta
 cabos
 azuis
 sobra
-xviii
 usava
 cruel
 criam
@@ -1235,7 +1234,6 @@ urnas
 lopes
 lutam
 expõe
-ufrgs
 chalé
 gesso
 vácuo
@@ -1708,7 +1706,6 @@ quiçá
 pomba
 rímel
 morno
-aneel
 optei
 valsa
 óxido
@@ -1742,7 +1739,6 @@ traze
 apito
 tutor
 áries
-xxiii
 caber
 nasal
 valha
@@ -2413,7 +2409,6 @@ acari
 volvo
 rouca
 avelã
-utfpr
 comes
 vazar
 agito
@@ -2740,7 +2735,6 @@ ethos
 mitra
 xisto
 sulco
-xxvii
 trena
 coros
 reúna
@@ -2765,7 +2759,6 @@ tampe
 taipa
 rezam
 bodes
-xxxvi
 manja
 garis
 peido
@@ -2917,7 +2910,6 @@ foros
 totem
 polia
 sarar
-ufrpe
 cubas
 checo
 enjoa

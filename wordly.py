@@ -35,13 +35,6 @@ for i in range(190, 750, 140):
 #update display
 pygame.display.update()
 
-    #word list and word draw management
-#open uppercase word list
-with open("lista_palavras.txt","r") as file:
-
-    
-
-    #main logic
 #create the Draw and Try dictionaries
 tryDict = {
         1: {"value": "", "repeat": 0, "color": [0, 0, 0]},
@@ -67,17 +60,33 @@ winmsg = ["Inacreditável...", "Incrível!", "Sensacional!", "Muito bom", "Bom",
 tryPos = 0
 gameover = False
 
+#word list and word draw management
+#open uppercase word list, format and store it in a variable
+with open("lista_palavras_semAcent_maisc.txt","r") as file:
+    
+    strippy = [lines.strip() for lines in file]
+
+#random draw and assignment to drawDict
+strippyRand = strippy[random.ran(1, 3000)]
+for i in drawDict:
+
+    drawDict[i]["value"] = strippyRand[i-1]
+
+#variable to store draw index position on "lista_palavras_semAcent_maisc.txt"
+indexDraw = strippy.index(strippyRand)
+
+#main logic  
 def wordle():
 
     while gameover == False:
 
         global tryPos
 
-        #populate tryDict with user input(not done yet)
-
-        #populate tryDict with user input(not done yet)
+        userInput()
 
         wordLength(tryDict)
+
+        checkIfWordList(tryDict)
 
         userInputReset()
         
@@ -88,6 +97,8 @@ def wordle():
         missYellowry(drawDict, tryDict)
         
         resetDrawTry("RC", "R")
+
+        doAccentTryDict(tryDict)
 
         tryListUpdate()
 
@@ -121,7 +132,10 @@ def wordle():
             tryListClear()
             keyboardClear()
             wordle()
-        
+
+#user input into tryDict. Text only. Will be converted to GUI.
+def userInput():
+
 #check for input length. Five letter words only
 def wordLength(tryVar):
     
@@ -132,6 +146,23 @@ def wordLength(tryVar):
             print(f'Five letter words only.\n')
             input()
             wordle()
+
+#check if the current attempt is in the word list. No 3000 words limit.
+def checkIfWordList(tryVar):
+
+    with open("lista_palavras_semAcent_maisc.txt","r") as file:
+    
+        strippy = [lines.strip() for lines in file]
+    
+    bindTryDict = ""
+    for i in tryVar:
+
+        bindTryDict += tryVar[i]["value"]
+
+    if bindTryDict in strippy == False:
+
+        print(f"Palavra inválida.\n")
+        wordle()        
 
 #clear the user input field
 def userInputReset():
@@ -146,19 +177,25 @@ def yellowAndRepeats(drawVar, tryVar):
 
             #check for same letter within drawDict
             if drawVar[i]["value"] == drawVar[i2]["value"]:
+
                 drawVar[i]["repeat"] += 1 
 
             #check for same letter within tryDict
             if tryVar[i]["value"] == tryVar[i2]["value"]:
+
                 tryVar[i]["repeat"] += 1
 
             #color yellow letters that are equal between drawDict and tryDict that were not yet evaluated as such
             if (drawVar[i]["value"] == tryVar[i2]["value"] and
+
                 drawVar[i]["color"] != [204, 204, 0] and
+
                 tryVar[i2]["color"] != [204, 204, 0]
             ):
                 drawVar[i]["color"] = [204, 204, 0]
+
                 tryVar[i2]["color"] = [204, 204, 0]
+
                 #call keyboard function to update the virtual keyboard
                 keyboard(i2, "colorType")
 
@@ -168,8 +205,11 @@ def checkForGreen(drawVar, tryVar):
     for i in range(1,6):
 
         if drawVar[i]["value"] == tryVar[i]["value"]:
+
             drawVar[i]["color"] = [0, 255, 0]
+
             tryVar[i]["color"] = [0, 255, 0]
+
             keyboard(i, "colorType")
             keyboard(i, "blackType")
 
@@ -219,6 +259,17 @@ def resetDrawTry(drawType, tryType):
 
             tryDict[i]["color"] = [0, 0, 0]
 
+#match unaccented charaters in "...semAcen..." list with "lista_palavras.txt" to tryDict
+def doAccentTryDict(tryVar):
+
+    with open("lista_palavras.txt","r") as file:
+
+        strippy = [lines.strip() for lines in file]
+
+    for i in tryVar:
+
+        tryVar[i]["value"] = strippy[indexDraw + 1][i].upper()
+
 #update the attempts list, tries
 def tryListUpdate():
 
@@ -244,11 +295,15 @@ def resetDicts_EndVars():
     for i in tryDict:
 
         tryDict[i]["value"] = ""
+
         tryDict[i]["repeat"] = 0
+
         tryDict[i]["color"] = [0, 0, 0]
 
         drawDict[i]["value"] = ""
+
         drawDict[i]["repeat"] = 0
+        
         drawDict[i]["color"] = [0, 0, 0]
 
 #clear the attempts list
