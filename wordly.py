@@ -273,7 +273,7 @@ def doAccentTryDict(tryVar):
 #update the attempts list, tries
 def tryListUpdate():
 
-#check if the game score
+#check the game score
 def gameStatus(tryVar): 
 
     count = 0
