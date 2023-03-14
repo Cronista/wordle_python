@@ -171,33 +171,33 @@ def userInputReset():
 def yellowAndRepeats(drawVar, tryVar):  
 
     #double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
-    for i in range(1,6):
+    for j in range(len(drawVar) * len(tryVar)):
 
-        for i2 in range(1,6):
+        i, i2 = divmod(j, len(tryVar))
 
-            #check for same letter within drawDict
-            if drawVar[i]["value"] == drawVar[i2]["value"]:
+        #check for same letter within drawDict
+        if drawVar[i+1]["value"] == drawVar[i2+1]["value"]:
 
-                drawVar[i]["repeat"] += 1 
+            drawVar[i+1]["repeat"] += 1 
 
-            #check for same letter within tryDict
-            if tryVar[i]["value"] == tryVar[i2]["value"]:
+        #check for same letter within tryDict
+        if tryVar[i+1]["value"] == tryVar[i2+1]["value"]:
 
-                tryVar[i]["repeat"] += 1
+            tryVar[i+1]["repeat"] += 1
 
-            #color yellow letters that are equal between drawDict and tryDict that were not yet evaluated as such
-            if (drawVar[i]["value"] == tryVar[i2]["value"] and
+        #color yellow letters that are equal between drawDict and tryDict that were not yet evaluated as such
+        if (drawVar[i+1]["value"] == tryVar[i2+1]["value"] and
 
-                drawVar[i]["color"] != [204, 204, 0] and
+            drawVar[i+1]["color"] != [204, 204, 0] and
 
-                tryVar[i2]["color"] != [204, 204, 0]
-            ):
-                drawVar[i]["color"] = [204, 204, 0]
+            tryVar[i2+1]["color"] != [204, 204, 0]
+        ):
+            drawVar[i+1]["color"] = [204, 204, 0]
 
-                tryVar[i2]["color"] = [204, 204, 0]
+            tryVar[i2+1]["color"] = [204, 204, 0]
 
-                #call keyboard function to update the virtual keyboard
-                keyboard(i2, "colorType")
+            #call keyboard function to update the virtual keyboard
+            keyboard(i2+1, "colorType")
 
 #verify and color green when the letters are equal and on the same position
 def checkForGreen(drawVar, tryVar):
