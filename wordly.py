@@ -67,7 +67,7 @@ with open("lista_palavras_semAcent_maisc.txt","r") as file:
     strippy = [lines.strip() for lines in file]
 
 #random draw and assignment to drawDict
-strippyRand = strippy[random.ran(1, 3000)]
+strippyRand = strippy[random.randint(1, 3000)]
 for i in drawDict:
 
     drawDict[i]["value"] = strippyRand[i-1]
@@ -78,11 +78,11 @@ indexDraw = strippy.index(strippyRand)
 #main logic  
 def wordle():
 
+    global gameover, tryPos
+
     while gameover == False:
 
-        global tryPos
-
-        userInput()
+        userInput(tryDict)
 
         wordLength(tryDict)
 
@@ -117,6 +117,12 @@ def wordle():
                     keyboardClear()
                     wordle()
 
+        #print visuals returns text; debug/playtest
+        for i in tryDict:
+
+            print(tryDict[i]["value"] + str(tryDict[i]["color"]))
+            print("\n")
+        
         resetDrawTry("", "C")
 
         tryPos += 1
@@ -131,10 +137,16 @@ def wordle():
             resetDicts_EndVars()
             tryListClear()
             keyboardClear()
-            wordle()
+            wordle()    
 
 #user input into tryDict. Text only. Will be converted to GUI.
-def userInput():
+def userInput(tryVar):
+
+    uInput = input()
+
+    for i in tryVar:
+
+        tryVar[i]["value"] = uInput[i-1]
 
 #check for input length. Five letter words only
 def wordLength(tryVar):
@@ -166,11 +178,13 @@ def checkIfWordList(tryVar):
 
 #clear the user input field
 def userInputReset():
+    #todo
+    return None
             
 #check if it is yellow and repeats
 def yellowAndRepeats(drawVar, tryVar):  
 
-    #double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
+    #unested double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
     for j in range(len(drawVar) * len(tryVar)):
 
         i, i2 = divmod(j, len(tryVar))
@@ -216,19 +230,19 @@ def checkForGreen(drawVar, tryVar):
 #check whether a rogue yellow was mistakenly colored and remove it 
 def missYellowry(drawVar, tryVar):
 
-    for oneYellowIndex in range(1,6):
+    for j in range(len(drawVar) * len(tryVar)):
 
-        for twoYellowIndex in range(1,6):
+        oneYellowIndex, twoYellowIndex = divmod(j, len(tryVar))
 
-            if (tryVar[oneYellowIndex]["value"] == drawVar[twoYellowIndex]["value"] and
+        if (tryVar[oneYellowIndex + 1]["value"] == drawVar[twoYellowIndex + 1]["value"] and
 
-                tryVar[oneYellowIndex]["color"] != drawVar[twoYellowIndex]["color"] and
+            tryVar[oneYellowIndex + 1]["color"] != drawVar[twoYellowIndex + 1]["color"] and
 
-                tryVar[oneYellowIndex]["color"] != [0, 255, 0] and
-                
-                drawVar[twoYellowIndex]["repeat"] < tryVar[oneYellowIndex]["repeat"]
-            ):
-                tryVar[oneYellowIndex]["color"] = [0, 0, 0]
+            tryVar[oneYellowIndex + 1]["color"] != [0, 255, 0] and
+            
+            drawVar[twoYellowIndex + 1]["repeat"] < tryVar[oneYellowIndex + 1]["repeat"]
+        ):
+            tryVar[oneYellowIndex + 1]["color"] = [0, 0, 0]
 
 #reset the values information from the try and draw dictionaries, setting up for the next attempt
 def resetDrawTry(drawType, tryType):
@@ -268,10 +282,12 @@ def doAccentTryDict(tryVar):
 
     for i in tryVar:
 
-        tryVar[i]["value"] = strippy[indexDraw + 1][i].upper()
+        tryVar[i]["value"] = strippy[indexDraw + 1][i-1].upper()
 
 #update the attempts list, tries
 def tryListUpdate():
+    #todo
+    return None
 
 #check the game score
 def gameStatus(tryVar): 
@@ -308,12 +324,21 @@ def resetDicts_EndVars():
 
 #clear the attempts list
 def tryListClear():
+    #todo
+    return None
 
 #clear the virtual keyboard
 def keyboardClear():
+    #todo
+    return None
 
 #update the virtual keyboard with the color information of each letter used in the attempt: black, gray, yellow or green
 def keyboard(currentIndex, type):
+    #todo
+    return None
+
+#start    
+wordle()
 
 #exit routine
 is_running = True
