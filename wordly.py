@@ -9,10 +9,12 @@ pygame.init()
 #define variables
 width = 800
 height = 600
-yellow = (204,204, 0)
-green = (0, 255, 0)
-black = (0, 0, 0)
-gray = (166, 166, 166)
+
+#color varibles definition
+yellow = [204,204, 0]
+green = [0, 255, 0]
+black = [0, 0, 0]
+gray = [166, 166, 166]
 
 #define gui; create canvas
 pygame.display.set_caption('Wordly')
@@ -37,19 +39,19 @@ pygame.display.update()
 
 #create the Draw and Try dictionaries
 tryDict = {
-        1: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        2: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        3: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        4: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        5: {"value": "", "repeat": 0, "color": [0, 0, 0]}
+        1: {"value": "", "repeat": 0, "color": black},
+        2: {"value": "", "repeat": 0, "color": black},
+        3: {"value": "", "repeat": 0, "color": black},
+        4: {"value": "", "repeat": 0, "color": black},
+        5: {"value": "", "repeat": 0, "color": black}
     }
 
 drawDict = {
-        1: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        2: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        3: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        4: {"value": "", "repeat": 0, "color": [0, 0, 0]},
-        5: {"value": "", "repeat": 0, "color": [0, 0, 0]}
+        1: {"value": "", "repeat": 0, "color": black},
+        2: {"value": "", "repeat": 0, "color": black},
+        3: {"value": "", "repeat": 0, "color": black},
+        4: {"value": "", "repeat": 0, "color": black},
+        5: {"value": "", "repeat": 0, "color": black}
     }
 
 #end game counters
@@ -202,13 +204,13 @@ def yellowAndRepeats(drawVar, tryVar):
         #color yellow letters that are equal between drawDict and tryDict that were not yet evaluated as such
         if (drawVar[i+1]["value"] == tryVar[i2+1]["value"] and
 
-            drawVar[i+1]["color"] != [204, 204, 0] and
+            drawVar[i+1]["color"] != yellow and
 
-            tryVar[i2+1]["color"] != [204, 204, 0]
+            tryVar[i2+1]["color"] != yellow
         ):
-            drawVar[i+1]["color"] = [204, 204, 0]
+            drawVar[i+1]["color"] = yellow
 
-            tryVar[i2+1]["color"] = [204, 204, 0]
+            tryVar[i2+1]["color"] = yellow
 
             #call keyboard function to update the virtual keyboard
             keyboard(i2+1, "colorType")
@@ -220,9 +222,9 @@ def checkForGreen(drawVar, tryVar):
 
         if drawVar[i]["value"] == tryVar[i]["value"]:
 
-            drawVar[i]["color"] = [0, 255, 0]
+            drawVar[i]["color"] = green
 
-            tryVar[i]["color"] = [0, 255, 0]
+            tryVar[i]["color"] = green
 
             keyboard(i, "colorType")
             keyboard(i, "blackType")
@@ -238,11 +240,11 @@ def missYellowry(drawVar, tryVar):
 
             tryVar[oneYellowIndex + 1]["color"] != drawVar[twoYellowIndex + 1]["color"] and
 
-            tryVar[oneYellowIndex + 1]["color"] != [0, 255, 0] and
+            tryVar[oneYellowIndex + 1]["color"] != green and
             
             drawVar[twoYellowIndex + 1]["repeat"] < tryVar[oneYellowIndex + 1]["repeat"]
         ):
-            tryVar[oneYellowIndex + 1]["color"] = [0, 0, 0]
+            tryVar[oneYellowIndex + 1]["color"] = black
 
 #reset the values information from the try and draw dictionaries, setting up for the next attempt
 def resetDrawTry(drawType, tryType):
@@ -265,13 +267,13 @@ def resetDrawTry(drawType, tryType):
 
         for i in drawDict:
 
-            drawDict[i]["color"] = [0, 0, 0]
+            drawDict[i]["color"] = black
 
     if "C" in tryType:
 
         for i in tryDict:
 
-            tryDict[i]["color"] = [0, 0, 0]
+            tryDict[i]["color"] = black
 
 #match unaccented charaters in "...semAcen..." list with "lista_palavras.txt" to tryDict
 def doAccentTryDict(tryVar):
@@ -295,7 +297,7 @@ def gameStatus(tryVar):
     count = 0
     for i in tryVar:
 
-        if tryVar[i]["color"] == [0, 255, 0]:
+        if tryVar[i]["color"] == green:
 
             count += 1
 
@@ -314,13 +316,13 @@ def resetDicts_EndVars():
 
         tryDict[i]["repeat"] = 0
 
-        tryDict[i]["color"] = [0, 0, 0]
+        tryDict[i]["color"] = black
 
         drawDict[i]["value"] = ""
 
         drawDict[i]["repeat"] = 0
         
-        drawDict[i]["color"] = [0, 0, 0]
+        drawDict[i]["color"] = black
 
 #clear the attempts list
 def tryListClear():
