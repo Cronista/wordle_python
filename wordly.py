@@ -62,26 +62,14 @@ winmsg = ["Inacreditável...", "Incrível!", "Sensacional!", "Muito bom", "Bom",
 tryPos = 0
 gameover = False
 
-#word list and word draw management
-#open uppercase word list, format and store it in a variable
-with open("lista_palavras_semAcent_maisc.txt","r") as file:
-    
-    strippy = [lines.strip() for lines in file]
-
-#random draw and assignment to drawDict
-strippyRand = strippy[random.randint(1, 3000)]
-for i in drawDict:
-
-    drawDict[i]["value"] = strippyRand[i-1]
-
-#variable to store draw index position on "lista_palavras_semAcent_maisc.txt"
-indexDraw = strippy.index(strippyRand)
+#variable to store attempted word for indexing
+bindTryDict = ""
 
 #main logic  
 def wordle():
 
     global gameover, tryPos
-
+    
     while gameover == False:
 
         userInput(tryDict)
@@ -117,6 +105,7 @@ def wordle():
                     resetDicts_EndVars()
                     tryListClear()
                     keyboardClear()
+                    draw()
                     wordle()
 
         #print visuals returns text; debug/playtest
@@ -132,14 +121,36 @@ def wordle():
         if tryPos == 6:
 
             gameover = True
-            print("Perdeu") #will be changed to only the draw word
+            print(draw()[1])
             print("\n")
             input()
 
             resetDicts_EndVars()
             tryListClear()
             keyboardClear()
+            draw()
             wordle()    
+
+def draw():
+
+    #word list and word draw management
+    #open uppercase word list, format and store it in a variable
+    with open("lista_palavras_semAcent_maisc.txt","r") as file:
+        
+        strippy = [lines.strip() for lines in file]
+
+    #random draw and assignment to drawDict
+    strippyRand = strippy[random.randint(1, 3000)]
+    for i in drawDict:
+
+        drawDict[i]["value"] = strippyRand[i-1]
+
+    #variable to store draw index position on "lista_palavras_semAcent_maisc.txt"
+    indexDraw = strippy.index(strippyRand)
+
+    return indexDraw, strippyRand
+
+draw()
 
 #user input into tryDict. Text only. Will be converted to GUI.
 def userInput(tryVar):
@@ -164,18 +175,20 @@ def wordLength(tryVar):
 #check if the current attempt is in the word list. No 3000 words limit.
 def checkIfWordList(tryVar):
 
+    global bindTryDict
+
     with open("lista_palavras_semAcent_maisc.txt","r") as file:
     
         strippy = [lines.strip() for lines in file]
-    
-    bindTryDict = ""
+
     for i in tryVar:
 
         bindTryDict += tryVar[i]["value"]
 
-    if bindTryDict in strippy == False:
+    if not bindTryDict in strippy:
 
         print(f"Palavra inválida.\n")
+        bindTryDict = ""
         wordle()        
 
 #clear the user input field
@@ -278,13 +291,22 @@ def resetDrawTry(drawType, tryType):
 #match unaccented charaters in "...semAcen..." list with "lista_palavras.txt" to tryDict
 def doAccentTryDict(tryVar):
 
+    global bindTryDict
+
     with open("lista_palavras.txt","r") as file:
 
         strippy = [lines.strip() for lines in file]
 
+    with open("lista_palavras_semAcent_maisc.txt", "r") as file:
+
+        strippySemAcent = [lines.strip() for lines in file]
+
     for i in tryVar:
 
-        tryVar[i]["value"] = strippy[indexDraw + 1][i-1].upper()
+        tryVar[i]["value"] = strippy[strippySemAcent.index(bindTryDict)][i-1].upper()
+
+    #reset bindTryDict for next attempt
+    bindTryDict = ""
 
 #update the attempts list, tries
 def tryListUpdate():
