@@ -207,7 +207,7 @@ def yellowAndRepeats(drawVar, tryVar):
 
             tryVar[i+1]["repeat"] += 1
 
-        #color yellow letters that are equal between drawDict and tryDict that were not yet evaluated as such
+        #color letters yellow that are equal between drawDict and tryDict that were not yet evaluated as such
         if (drawVar[i+1]["value"] == tryVar[i2+1]["value"] and
 
             drawVar[i+1]["color"] != yellow and
