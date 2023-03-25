@@ -106,7 +106,7 @@ def wordle():
                     draw()
                     wordle()
 
-        #print visuals returns text; debug/playtest
+        #print visuals return text; debug/playtest
         for i in tryDict:
 
             print(tryDict[i]["value"] + str(tryDict[i]["color"]))
