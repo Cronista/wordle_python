@@ -74,8 +74,6 @@ def wordle():
 
         userInput(tryDict)
 
-        wordLength(tryDict)
-
         checkIfWordList(tryDict)
 
         userInputReset()
@@ -157,20 +155,15 @@ def userInput(tryVar):
 
     uInput = input()
 
+    #check for input length before assigning to dict. Five letter words only
+    if len(uInput) != 5:
+
+        print(f'Apenas palavras de cinco letras.\n')
+        wordle()
+
     for i in tryVar:
 
         tryVar[i]["value"] = uInput[i-1]
-
-#check for input length. Five letter words only
-def wordLength(tryVar):
-    
-    for i in tryVar:
-        
-        if tryVar[i]["value"] == '':
-
-            print(f'Five letter words only.\n')
-            input()
-            wordle()
 
 #check if the current attempt is in the word list. No 3000 words limit.
 def checkIfWordList(tryVar):
