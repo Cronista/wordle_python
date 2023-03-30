@@ -2,40 +2,11 @@ import pygame
 import random
 #import pygame_gui
 
-#import pygame_gui
-
-pygame.init()
-
-#define variables
-width = 800
-height = 600
-
-#color varibles definition
+#color definition
 yellow = [204,204, 0]
 green = [0, 255, 0]
 black = [0, 0, 0]
 gray = [166, 166, 166]
-
-#define gui; create canvas
-pygame.display.set_caption('Wordly')
-canvas = pygame.display.set_mode((width, height))
-
-background = pygame.Surface((width, height))
-background.fill(pygame.Color('#000000'))
-
-##manager = pygame_gui.UIManager((800, 600))
-
-#draw background into canvas
-canvas.blit(background, (0,0))
-
-#draw word/letters container 
-pygame.draw.rect(canvas, gray, (50,230,700,140), 5)
-
-for i in range(190, 750, 140):
-    pygame.draw.rect(canvas, gray, (i,230,5,140), 5)
-
-#update display
-pygame.display.update()
 
 #create the Draw and Try dictionaries
 tryDict = {
@@ -109,9 +80,10 @@ def wordle():
         #print visuals return text; debug/playtest
         for i in tryDict:
 
-            print(tryDict[i]["value"] + str(tryDict[i]["color"]))
-            print("\n")
+            print(tryDict[i]["value"] + str(tryDict[i]["color"]), end=" ")
         
+        print("\n")
+
         resetDrawTry("", "C")
 
         tryPos += 1
@@ -354,14 +326,42 @@ def keyboard(currentIndex, type):
     #todo
     return None
 
+# pygame.init()
+
+# #define variables
+# width = 800
+# height = 600
+
+# #define gui; create canvas
+# pygame.display.set_caption('Wordly')
+# canvas = pygame.display.set_mode((width, height))
+
+# background = pygame.Surface((width, height))
+# background.fill(pygame.Color('#000000'))
+
+# ##manager = pygame_gui.UIManager((800, 600))
+
+# #draw background into canvas
+# canvas.blit(background, (0,0))
+
+# #draw word/letters container 
+# pygame.draw.rect(canvas, gray, (50,230,700,140), 5)
+
+# for i in range(190, 750, 140):
+#     pygame.draw.rect(canvas, gray, (i,230,5,140), 5)
+
+# #update display
+# pygame.display.update()
+
 #start    
 wordle()
 
-#exit routine
-is_running = True
+# #exit routine
+# is_running = True
 
-while is_running:
+# while is_running:
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            is_running = False
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             is_running = False
+
