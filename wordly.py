@@ -80,7 +80,11 @@ def wordle():
         #print visuals return text; debug/playtest
         for i in tryDict:
 
-            print(tryDict[i]["value"] + str(tryDict[i]["color"]), end=" ")
+            print(
+                tryDict[i]["value"] + 
+                str(tryDict[i]["color"]), 
+                end=" "
+                )
         
         print("\n")
 
@@ -161,7 +165,7 @@ def userInputReset():
     #todo
     return None
             
-#check if it is yellow and repeats
+#check if the letter is yellow and if it repeats
 def yellowAndRepeats(drawVar, tryVar):  
 
     #unested double For Loop to check various conditions on the nature of each letter in tryDict and drawDict
@@ -273,7 +277,7 @@ def doAccentTryDict(tryVar):
     #reset bindTryDict for next attempt
     bindTryDict = ""
 
-#update the attempts list, tries
+#update the attempts list
 def tryListUpdate():
     #todo
     return None
